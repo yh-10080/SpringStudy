@@ -1,0 +1,128 @@
+一、选择题（共12小题，每小题2.5分，共30分）
+	以下不是spring boot优点的是 (c)
+		A．快速搭建项目
+		B．简化配置  
+		C．自动配置  
+		D．无需容器
+	Spring Boot配置，以下哪个优先级最高（a）
+		A、外置：xx.jar同目录下/config/application.properties；
+		B、外置：xx.jar同目录下/config/application.yml；
+		C、内置：src/main/resources/config；
+		D、内置：src/main/resources
+	以下log日志级别哪个最高（d）
+		A、DEBUG
+		B、INFO
+		C、WARN
+		D、ERROR
+	以下不是spring boot的核心注解的是 (d)
+		A.	@SpringBootConfiguration
+		B.	@EnableAutoConfiguration
+		C.	@ComponentScan
+		D.	@MapperScan
+	要使用springMVC的功能，以下哪个架包是必须加的 (c)
+		A．spring-boot-starter-jdbc  
+		B．spring-boot-starter-thymeleaf  
+		C．spring-boot-starter-web  
+		D．mybatis-spring-boot-starter
+	以下哪个注解不能加在类上 (b)
+		A.	@Controller
+		B.	@ResponseBody
+		C.	@RestController
+		D.	@RequestMapping
+	当控制层上有@RestController注解时，方法中返回一个字符串“<h1>Hello</h1>” 的结果是 (c)
+		A. 一级标题显示的Hello
+		B.	找不到Hello.html
+		C.	<h1>Hello</>
+		D.	Hello
+	SpringBoot项目中配置文件的格式 (c)
+		A．properties  
+		B．yml  
+		C．两者都可以
+	前台使用json参数格式，控制器consumer、参数使用的注解是（a）
+		A、application/josn ---- @RequestBody
+		B、application/josn ---- @ModelAttribute
+		C、application/x-www-form-urlencoded ---- @RequestBody
+		D、application/x-www-form-urlencoded ---- @ModelAttribute
+	@Pointcut("execution(public * com.thornBird.sbd.modules.*.controller.*.*(..))")，第三个*代表（a）
+		A、代表返回类型不限
+		B、代表module下所有子包
+		C、代表所有类
+		D、代表所有方法
+	Url匹配风格中/admin*，以下哪个匹配不正确（d）
+		A、/admin
+		B、/admin1
+		C、/admin123
+		D、/admin/1
+	Mybatis框架中，插入数据使用那个注解（b）
+		A、@Update
+		B、@Insert
+		C、@Select
+		D、@InsertMapping
+二、填空题（共5小题，每小题5分，共25分）
+	Java配置依赖的2个注解是 @Configuration，@Bean；
+	修改tomcat端口号为9090应该怎么写？server.port=9090；
+	自定义拦截器需要实现 Filter 接口；
+	过滤器需要使用 @WebFilter 注解；
+	上传文件，使用 MultipartFile 接收文件对象，consumer使用 multipart/form-data；
+三、问答题（每题5分）
+	1、简述Spring
+		答：spring是一个开发应用框架：轻量级（依赖少、资源占用少、部署简单）、非侵入式、一站式、模块化，其目的是用于简化企业级应用程序开发，是一个低耦合、高内聚、超级粘合平台。框架的主要优势之一就是其分层架构。Spring的核心是控制反转(IOC)和面向切面(AOP)。
+	2、简述Git使用流程，写几个常用Git命令；
+		答：
+			1、将远程代码仓库 clone 到本地；
+			2、在代码仓库创建代码；
+			3、add 将新增代码 添加到 提交序列
+			4、commit 将提交序列 commit 到本地仓库， -m ""
+			5、push 将本地仓库 push 到远程；
+		几个常用的git命令：
+			从github上下载资源到本地：git clone 在github上的资源地址
+			将修改或新增内容添加到提交序列：git add 文件名称 如：git add test.txt
+			将提交序列内容 commit 到本地代码仓库:git commit -m "注释信息" 如：git commit -m "test" 
+			将本地仓库的变更 push 到远程仓库：	git push origin master
+	3、简述敏捷开发、Scrum流程；
+		答：
+		敏捷开发：
+			客户需求为核心，搞笑，迭代增量，大项目分为小项目，分别完成独立运行，控制时间周期、任务优先级、交付功能模块，根据客户反馈持续集成。
+		Scrum流程：
+			一种敏捷开发流程。首先对于一个大的需求，会预估工作量和时间，比如2个月时间，形成一个sprint，划分任务列表，比如前端、service、存储过程任务等；然后计划会议，将任务细化成issue，每个issue的开发周期控制在1-2天，分派到个人头上；根据每个人物创建父类分支，细化的issue提交到对应的分支上，每日做dailymerge，确保dev分支能正常集成编译，每日进行standing meeting，讲工作进度以及遇到的问题。最后一个sprint完成，进行演示和会议总结，回顾优缺点。
+			
+	4、简述shiro两大功能实现流程；
+		答：
+			shiro两大核心功能是身份验证和资源授权。
+			首先应用代码通过subject来进行认证和授权，subject委托给SecurityManager能对用户及其权限进行判断。
+四、编程题（共2小题，1题12分，2题13分，共25分）
+	1、访问控制层，将一个List装入requset中，再在页面上以表格的形式显示出来
+		答：
+		控制层：
+		@Controller
+		@RequestMapping("/test")
+		public class UserController {
+				@RequestMapping(value = "/user", consumes = "application/json")
+				public String indePage(@RequestBody List<City> cities,ModelMap modelMap) {
+					
+		
+					//使用ModelMap modelMap属性，来包装碎片
+					modelMap.addAttribute("cities", cities);
+					
+					return "index";
+				}
+		}
+		
+		前端：
+		<table>
+			<th>cityId</th>
+			<th>cityName</th>
+			<th>countryId</th>
+			<tr th:each="city : ${cities}">
+			    <td th:text="${city.cityId}"></td>
+			    <td th:text="${city.cityName}"></td>
+			    <td th:text="${city.countryId}"></td>
+		    </tr>
+		</table>
+	2、请写出重定向到某个页面的代码
+		答：
+	@PostMapping(value="/files",consumes="multipart/form-data")
+	public String uploadFiles(RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", "upload success");
+		return "redirect:/test/index";
+	}
